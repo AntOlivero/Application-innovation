@@ -1,0 +1,88 @@
+My first sbatch script!
+Load data...
+Adjusting sequence length for actual size
+x_train shape: (18000, 4627)
+x_test shape: (2000, 4627)
+Vocabulary Size: 49702
+Model type is CNN-rand
+2022-01-05 07:31:08.163565: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-01-05 07:31:08.895309: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1525] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 15397 MB memory:  -> device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:d8:00.0, compute capability: 6.0
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ input_1 (InputLayer)           [(None, 4627)]       0           []                               
+                                                                                                  
+ embedding (Embedding)          (None, 4627, 50)     2485100     ['input_1[0][0]']                
+                                                                                                  
+ dropout (Dropout)              (None, 4627, 50)     0           ['embedding[0][0]']              
+                                                                                                  
+ conv1d (Conv1D)                (None, 4625, 10)     1510        ['dropout[0][0]']                
+                                                                                                  
+ conv1d_1 (Conv1D)              (None, 4620, 10)     4010        ['dropout[0][0]']                
+                                                                                                  
+ max_pooling1d (MaxPooling1D)   (None, 2312, 10)     0           ['conv1d[0][0]']                 
+                                                                                                  
+ max_pooling1d_1 (MaxPooling1D)  (None, 2310, 10)    0           ['conv1d_1[0][0]']               
+                                                                                                  
+ flatten (Flatten)              (None, 23120)        0           ['max_pooling1d[0][0]']          
+                                                                                                  
+ flatten_1 (Flatten)            (None, 23100)        0           ['max_pooling1d_1[0][0]']        
+                                                                                                  
+ concatenate (Concatenate)      (None, 46220)        0           ['flatten[0][0]',                
+                                                                  'flatten_1[0][0]']              
+                                                                                                  
+ dropout_1 (Dropout)            (None, 46220)        0           ['concatenate[0][0]']            
+                                                                                                  
+ dense (Dense)                  (None, 50)           2311050     ['dropout_1[0][0]']              
+                                                                                                  
+ dense_1 (Dense)                (None, 10)           510         ['dense[0][0]']                  
+                                                                                                  
+==================================================================================================
+Total params: 4,802,180
+Trainable params: 4,802,180
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Epoch 1/10
+2022-01-05 07:31:16.609508: I tensorflow/stream_executor/cuda/cuda_dnn.cc:366] Loaded cuDNN version 8200
+
+Epoch 00001: val_categorical_accuracy improved from -inf to 0.17750, saving model to ./model/best
+2022-01-05 07:31:36.465268: W tensorflow/python/util/util.cc:368] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+282/282 - 25s - loss: 2.2239 - categorical_accuracy: 0.1769 - val_loss: 2.2248 - val_categorical_accuracy: 0.1775 - 25s/epoch - 88ms/step
+Epoch 2/10
+
+Epoch 00002: val_categorical_accuracy did not improve from 0.17750
+282/282 - 10s - loss: 2.2098 - categorical_accuracy: 0.1839 - val_loss: 2.2293 - val_categorical_accuracy: 0.1765 - 10s/epoch - 35ms/step
+Epoch 3/10
+
+Epoch 00003: val_categorical_accuracy did not improve from 0.17750
+282/282 - 9s - loss: 2.2024 - categorical_accuracy: 0.1862 - val_loss: 2.2279 - val_categorical_accuracy: 0.1760 - 9s/epoch - 32ms/step
+Epoch 4/10
+
+Epoch 00004: val_categorical_accuracy did not improve from 0.17750
+282/282 - 9s - loss: 2.1843 - categorical_accuracy: 0.1887 - val_loss: 2.2251 - val_categorical_accuracy: 0.1755 - 9s/epoch - 31ms/step
+Epoch 5/10
+
+Epoch 00005: val_categorical_accuracy did not improve from 0.17750
+282/282 - 9s - loss: 2.1555 - categorical_accuracy: 0.2008 - val_loss: 2.2206 - val_categorical_accuracy: 0.1700 - 9s/epoch - 31ms/step
+Epoch 6/10
+
+Epoch 00006: val_categorical_accuracy did not improve from 0.17750
+282/282 - 9s - loss: 2.1200 - categorical_accuracy: 0.2130 - val_loss: 2.2309 - val_categorical_accuracy: 0.1595 - 9s/epoch - 31ms/step
+Epoch 7/10
+
+Epoch 00007: val_categorical_accuracy did not improve from 0.17750
+282/282 - 9s - loss: 2.0761 - categorical_accuracy: 0.2269 - val_loss: 2.2434 - val_categorical_accuracy: 0.1495 - 9s/epoch - 31ms/step
+Epoch 8/10
+
+Epoch 00008: val_categorical_accuracy did not improve from 0.17750
+282/282 - 9s - loss: 2.0289 - categorical_accuracy: 0.2488 - val_loss: 2.2598 - val_categorical_accuracy: 0.1535 - 9s/epoch - 31ms/step
+Epoch 9/10
+
+Epoch 00009: val_categorical_accuracy did not improve from 0.17750
+282/282 - 9s - loss: 1.9788 - categorical_accuracy: 0.2657 - val_loss: 2.2909 - val_categorical_accuracy: 0.1405 - 9s/epoch - 31ms/step
+Epoch 10/10
+
+Epoch 00010: val_categorical_accuracy did not improve from 0.17750
+282/282 - 9s - loss: 1.9348 - categorical_accuracy: 0.2865 - val_loss: 2.3112 - val_categorical_accuracy: 0.1430 - 9s/epoch - 31ms/step
